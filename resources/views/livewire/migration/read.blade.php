@@ -58,9 +58,11 @@
         <div class="sm:w-1/2 w-full items-center mt-3 sm:mt-0 px-5">
             <input x-on:click.prevent="showMigrateModal = true" type="submit" class="cursor-pointer hover:bg-green-600 rounded w-full py-2 bg-green-500 text-white" value="Migrate all">
         </div>
-        <div class="sm:w-1/2 w-full items-center mt-3 sm:mt-0 px-5">
-            <input x-on:click.prevent="showFreshModal = true" type="submit" class="cursor-pointer hover:bg-red-600 rounded w-full py-2 bg-red-500 text-white" value="Fresh database">
-        </div>
+        @if(config('app.env') === 'local')
+            <div class="sm:w-1/2 w-full items-center mt-3 sm:mt-0 px-5">
+                <input x-on:click.prevent="showFreshModal = true" type="submit" class="cursor-pointer hover:bg-red-600 rounded w-full py-2 bg-red-500 text-white" value="Fresh database">
+            </div>
+        @endif
     </div>
 
     <div style="display:none;" x-show="showFreshModal" class="fixed z-10 inset-0 overflow-y-auto">
@@ -132,9 +134,11 @@
                                 <p class="text-sm text-gray-500">
                                     Are you sure to migrate the migrations?
                                 </p>
-                                <div class="mt-2">
-                                    <span class="text-xs text-red-600 mt-4">Note: Safe migrate will fresh the database then re-run migrations!</span>
-                                </div>
+                                @if(config('app.env') === 'local')
+                                    <div class="mt-2">
+                                        <span class="text-xs text-red-600 mt-4">Note: Safe migrate will fresh the database then re-run migrations!</span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -144,9 +148,11 @@
                         <button wire:click="migrate" x-on:click.prevent="showMigrateModal = false" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 sm:ml-3 sm:w-auto sm:text-sm mt-3 sm:mt-0">
                             Normal Migrate
                         </button>
-                        <button wire:click="migrate(true)" x-on:click.prevent="showMigrateModal = false" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 sm:ml-3 sm:w-auto sm:text-sm mt-3 sm:mt-0">
-                            Safe Re-Migrate all
-                        </button>
+                        @if(config('app.env') === 'local')
+                            <button wire:click="migrate(true)" x-on:click.prevent="showMigrateModal = false" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 sm:ml-3 sm:w-auto sm:text-sm mt-3 sm:mt-0">
+                                Safe Re-Migrate all
+                            </button>
+                        @endif
                     </div>
                     <button x-on:click.prevent="showMigrateModal = false" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm mt-3 sm:mt-0">
                         Cancel

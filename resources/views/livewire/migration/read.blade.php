@@ -147,7 +147,7 @@
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 flex justify-between sm:flex-row-reverse">
                     <div>
                         <button wire:click="migrate" x-on:click.prevent="showMigrateModal = false" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 sm:ml-3 sm:w-auto sm:text-sm mt-3 sm:mt-0">
-                            Normal Migrate
+                            @if(config('app.env') === 'local')Normal Migrate @else Migrate @endif
                         </button>
                         @if(config('app.env') === 'local')
                             <button wire:click="migrate(true)" x-on:click.prevent="showMigrateModal = false" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 sm:ml-3 sm:w-auto sm:text-sm mt-3 sm:mt-0">

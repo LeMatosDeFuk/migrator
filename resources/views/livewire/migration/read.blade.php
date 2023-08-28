@@ -58,6 +58,7 @@
         <div class="sm:w-1/2 w-full items-center mt-3 sm:mt-0 px-5">
             <input x-on:click.prevent="showMigrateModal = true" type="submit" class="cursor-pointer hover:bg-green-600 rounded w-full py-2 bg-green-500 text-white" value="Migrate all">
         </div>
+
         <div class="sm:w-1/2 w-full items-center mt-3 sm:mt-0 px-5">
             @if(config('app.env') === 'local')
                 <input x-on:click.prevent="showFreshModal = true" type="submit" class="cursor-pointer hover:bg-red-600 rounded w-full py-2 bg-red-500 text-white" value="Fresh database">

@@ -48,7 +48,10 @@ class Read extends Component
     public function migrate($safe = false)
     {
         try{
-            Artisan::call('migrate');
+            Artisan::call('migrate', [
+                '--force' => true,
+            ]);
+
             $output = Artisan::output();
             $type = 'success';
         } catch (\Exception $exception){
